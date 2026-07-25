@@ -1,0 +1,25 @@
+name: Build SolidworksWrapper
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build SolidworksWrapper
+      run: msbuild SolidworksWrapper.sln /p:Configuration=Release
